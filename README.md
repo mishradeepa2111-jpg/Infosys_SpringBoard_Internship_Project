@@ -15,8 +15,8 @@
    - [Milestone 1 — Core Authentication & Role System](#milestone-1--core-authentication--role-system)
    - [Milestone 2 — Admin Dashboard & Disaster Management](#milestone-2--admin-dashboard--disaster-management)
    - [Milestone 3 — Alert Broadcasting & SSE Real-Time Notifications](#milestone-3--alert-broadcasting--sse-real-time-notifications)
-   - [Milestone 4 — Responder Dashboard & Alert Acknowledgment](#milestone-4--responder-dashboard--alert-acknowledgment)
-   - [Milestone 5 — Citizen Help Requests](#milestone-5--citizen-help-requests)
+   - [Milestone 4 — Responder Dashboard & Alert Acknowledgment ⏳ *(Pending)*](#milestone-4--responder-dashboard--alert-acknowledgment-pending)
+   - [Milestone 5 — Citizen Help Requests ⏳ *(Pending)*](#milestone-5--citizen-help-requests-pending)
 6. [Project Structure](#project-structure)
 7. [Setup & Running Locally](#setup--running-locally)
 8. [API Endpoints](#api-endpoints)
@@ -246,47 +246,51 @@ EventSource receives "ALERT" event in real-time
 
 ---
 
-### Milestone 4 — Responder Dashboard & Alert Acknowledgment
+### Milestone 4 — Responder Dashboard & Alert Acknowledgment ⏳ *(Pending — Yet to Implement)*
+
+> **🚧 Status: Not yet implemented.** This milestone is planned for the next phase of development.
 
 **Goal:** Build a dedicated Responder Dashboard that receives live alerts via SSE and allows responders to confirm their readiness.
 
-#### ✅ What was built:
-- **Responder Dashboard UI** — minimal, action-focused interface
+#### 📋 Planned Features:
+- **Responder Dashboard UI** — minimal, action-focused interface for emergency responders
 - **SSE Alert Reception** — responder's frontend subscribes to `/api/notifications/stream` and receives `ALERT` events in real-time
-- **"Confirm Receipt" Button** — responder acknowledges an alert
+- **"Confirm Receipt" Button** — responder acknowledges an alert with a single click
 - **Alert Acknowledgment API** (`POST /api/responder/alerts/{alertId}/acknowledge`) — saves acknowledgment to DB
 - **`AlertAcknowledgment` Entity** — stores `responderId`, `alertId`, `acknowledgedAt`, `readinessStatus`
 - **`ReadinessStatus` Enum** — `READY`, `UNAVAILABLE`, `EN_ROUTE`
 - **Admin sees readiness count** — Admin dashboard reflects how many responders have confirmed receipt, updated via SSE
 - **Graceful empty-state handling** — if notification payload is empty/malformed, UI shows fallback message
 
-#### 📂 Key Files:
+#### 📂 Planned Files:
 ```
 backend/src/main/java/com/disaster/management/
 ├── controllers/
-│   └── ResponderAlertController.java       ← Acknowledge endpoint
+│   └── ResponderAlertController.java       ← Acknowledge endpoint (planned)
 ├── services/
-│   └── ResponderAlertService.java          ← Acknowledgment processing
+│   └── ResponderAlertService.java          ← Acknowledgment processing (planned)
 ├── entities/
-│   ├── AlertAcknowledgment.java            ← Acknowledgment record
-│   └── ReadinessStatus.java
+│   ├── AlertAcknowledgment.java            ← Acknowledgment record (planned)
+│   └── ReadinessStatus.java               ← Enum: READY, UNAVAILABLE, EN_ROUTE (planned)
 ├── repositories/
-│   └── AlertAcknowledgmentRepository.java
+│   └── AlertAcknowledgmentRepository.java (planned)
 
 frontend/src/app/features/responder/
-└── dashboard/dashboard.component.ts        ← Responder Dashboard with SSE listener
+└── dashboard/dashboard.component.ts        ← Responder Dashboard (planned)
 ```
 
 ---
 
-### Milestone 5 — Citizen Help Requests
+### Milestone 5 — Citizen Help Requests ⏳ *(Pending — Yet to Implement)*
+
+> **🚧 Status: Not yet implemented.** This milestone is planned after Milestone 4 is complete.
 
 **Goal:** Allow citizens to submit emergency help requests that appear on the Admin Dashboard in real-time.
 
-#### ✅ What was built:
+#### 📋 Planned Features:
 - **Citizen Dashboard UI** — Simple form to submit help requests
 - **Submit Help Request** (`POST /api/citizen/help-request`) — stores request with emergency type, description, and location
-- **Admin View: Citizen Help Requests** — dedicated section in Admin Dashboard listing all help requests
+- **Admin View: Citizen Help Requests** — dedicated section in Admin Dashboard listing all active help requests
 - **`HelpRequest` Entity** — stores `citizenId`, `emergencyType`, `description`, `locationLabel`, `status`, `assignedResponderId`, `distanceToResponderKm`, `createdAt`
 - **`HelpRequestStatus` Enum** — `PENDING`, `ASSIGNED`, `COMPLETED`
 - **Emergency Type categorization** — FIRE, FLOOD, MEDICAL, CRIME, OTHER (with color-coded chips)
@@ -294,26 +298,26 @@ frontend/src/app/features/responder/
 - **Distance display** — shows proximity of nearest responder if assigned
 - **New request badge** — Admin's sidebar nav item shows a count badge when new help requests arrive
 
-#### 📂 Key Files:
+#### 📂 Planned Files:
 ```
 backend/src/main/java/com/disaster/management/
 ├── controllers/
-│   └── CitizenController.java              ← Submit & retrieve help requests
+│   └── CitizenController.java              ← Submit & retrieve help requests (planned)
 ├── services/
-│   └── CitizenHelpRequestService.java
+│   └── CitizenHelpRequestService.java     ← Service logic (planned)
 ├── entities/
-│   ├── HelpRequest.java
-│   └── HelpRequestStatus.java
+│   ├── HelpRequest.java                   ← Help request entity (planned)
+│   └── HelpRequestStatus.java            ← Enum: PENDING, ASSIGNED, COMPLETED (planned)
 ├── dto/
-│   ├── HelpRequestDTO.java                 ← Input DTO
-│   ├── HelpRequestResponse.java            ← Output DTO
-│   └── HelpRequestAdminView.java
+│   ├── HelpRequestDTO.java                 ← Input DTO (planned)
+│   ├── HelpRequestResponse.java            ← Output DTO (planned)
+│   └── HelpRequestAdminView.java          ← Admin view DTO (planned)
 └── repositories/
-    └── HelpRequestRepository.java
+    └── HelpRequestRepository.java         ← (planned)
 
 frontend/src/app/features/
-├── user/dashboard/dashboard.component.ts   ← Citizen Dashboard
-└── admin/dashboard/dashboard.component.ts  ← Help Requests view section
+├── user/dashboard/dashboard.component.ts   ← Citizen Dashboard (planned)
+└── admin/dashboard/dashboard.component.ts  ← Help Requests section (planned)
 ```
 
 ---
@@ -508,8 +512,8 @@ help_requests
 | 🗂️ Live Incidents Table | Filterable table with severity badges and action dropdowns |
 | 📡 Broadcast Modal | Broadcast alerts with custom message and region targeting |
 | 🔔 SSE Real-Time Alerts | Push notifications delivered instantly to open dashboards |
-| ✅ Responder Acknowledgment | Responders confirm receipt with a single click |
-| 🆘 Citizen Help Requests | Citizens submit emergencies; admins see them with type chips and status |
+| ⏳ Responder Acknowledgment | *(Pending — Milestone 4)* Responders confirm receipt with a single click |
+| ⏳ Citizen Help Requests | *(Pending — Milestone 5)* Citizens submit emergencies; admins see them with type chips and status |
 
 ---
 
