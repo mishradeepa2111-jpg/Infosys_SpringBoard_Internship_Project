@@ -22,7 +22,7 @@
 8. [API Endpoints](#api-endpoints)
 9. [Database Schema Overview](#database-schema-overview)
 10. [Screenshots / Features](#screenshots--features)
-11. [Future Enhancements](#future-enhancements)
+
 
 ---
 
@@ -517,18 +517,6 @@ help_requests
 
 ---
 
-## 🔮 Future Enhancements
-
-- [ ] **Map Integration** — Display disaster events and responder locations on an interactive map (Google Maps / Leaflet)
-- [ ] **WebSocket upgrade** — Replace SSE with WebSocket for bi-directional communication
-- [ ] **Push Notifications** — Browser push & email notifications
-- [ ] **Analytics Dashboard** — Charts for disaster trends, response times, resolution rates
-- [ ] **Mobile App** — React Native or Flutter citizen app
-- [ ] **Python ML Backend** — Disaster prediction using historical data
-- [ ] **File Upload** — Citizens can attach photos to help requests
-- [ ] **Pagination** — Paginate large incident and help request tables
-
----
 
 ## 👩‍💻 Author
 
